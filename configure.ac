@@ -26,5 +26,14 @@ AC_TYPE_PID_T
 AC_FUNC_FORK
 AC_CHECK_FUNCS([dup2 strdup])
 
+PKG_CHECK_MODULES([SYSTEMD], [systemd])
+
+dir=""
+AC_ARG_WITH([systemdsystemunitdir], AS_HELP_STRING([--with-systemdsystemunitdir=DIR],
+            [path to systemd system service dir @<:@default=/usr/lib/systemd/system@:>@]), [dir=${withval}],
+            [dir="$($PKG_CONFIG --variable=systemdsystemunitdir systemd)"])
+test -z "${dir}" && dir=/usr/lib/systemd/system
+AC_SUBST(systemdsystemunitdir, [${dir}])
+
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT

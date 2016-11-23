@@ -1,0 +1,11 @@
+[Unit]
+Description=swupd telemetry probe
+ConditionPathExists=!/etc/telemetrics/opt-out
+Requires=telemd.socket
+After=telemd.socket
+
+[Path]
+DirectoryNotEmpty=/var/lib/swupd/telemetry
+
+[Install]
+WantedBy=multi-user.target

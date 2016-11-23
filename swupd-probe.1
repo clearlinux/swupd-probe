@@ -1,0 +1,45 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "SWUPD\-PROBE" "1" "November 2016" "" ""
+.
+.SH "NAME"
+\fBswupd\-probe\fR \- Deliver swupd telemetry records
+.
+.SH "SYNOPSIS"
+\fBswupd\-probe\fR \fB/var/lib/swupd/telemetry\fR
+.
+.SH "DESCRIPTION"
+\fBswupd\-probe\fR is a telemetry delivery agent that relays telemetry records from \fBswupd(1)\fR to \fBtelemd(1)\fR\. The telemetry records are stored in \fB/var/lib/swupd/telemetry\fR and are not directly accessible by \fBtelemd\fR, hence the use of this agent\.
+.
+.SH "SYNTAX"
+The agent is not to be executed directly from the commandline or directly by a user\. A \fBswupd\-probe\.path\fR unit instructs systemd to start the agent on demand whenever records are created\.
+.
+.SH "EXIT STATUS"
+The agent exits when there are no more records to relay to the telemetry service\. A non\-zero exit status indicates a failure occurred\.
+.
+.SH "COPYRIGHT"
+.
+.IP "\(bu" 4
+Copyright (C) 2016 Intel Corporation, License: CC\-BY\-SA\-3\.0
+.
+.IP "" 0
+.
+.SH "SEE ALSO"
+.
+.IP "\(bu" 4
+swupd(1), telemd(1)
+.
+.IP "\(bu" 4
+https://clearlinux\.org/documentation/
+.
+.IP "" 0
+.
+.SH "NOTES"
+Creative Commons Attribution\-ShareAlike 3\.0 Unported
+.
+.IP "\(bu" 4
+http://creativecommons\.org/licenses/by\-sa/3\.0/
+.
+.IP "" 0
+

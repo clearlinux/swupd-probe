@@ -1,0 +1,7 @@
+[Unit]
+Description=swupd telemetry probe
+ConditionPathExists=!/etc/telemetrics/opt-out
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/swupd-probe
