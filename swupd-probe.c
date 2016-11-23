@@ -117,6 +117,8 @@ static void deliver_payload(const char *filename)
 			exit(EXIT_FAILURE);
 		}
 
+		close(fd);
+
 		/* drop privileges */
 		if (setgroups(0, NULL)) {
 			perror("setgroups");
