@@ -35,7 +35,7 @@
 #include <string.h>
 
 #define TELEMETRY_DIR "/var/lib/swupd/telemetry"
-#define TELEMETRY_CLASS "org.clearlinux/swupd-client/testing"
+#define TELEMETRY_CLASS_UNKNOWN "org.clearlinux/swupd-client/unknown"
 
 static uid_t uid;
 static gid_t gid;
@@ -79,6 +79,7 @@ static void deliver_payload(const char *filename)
 	char *tmp;
 	char *version;
 	char *severity;
+	char *class = NULL;
 
 	tmp = strdup(filename);
 	if (!tmp) {
@@ -90,6 +91,20 @@ static void deliver_payload(const char *filename)
 	if (!version) {
 		fprintf(stderr, "%s: does not look like a telemetry record\n", filename);
 		exit(EXIT_FAILURE);
+	}
+
+	if (strcmp(version, "2") == 0) {
+		char *s = strtok(NULL, ".");
+		if (!s) {
+			fprintf(stderr, "%s: does not look like a telemetry record\n", s);
+			exit(EXIT_FAILURE);
+		}
+		if (asprintf(&class, "org.clearlinux/swupd-client/%s", s) < 29) {
+			fprintf(stderr, "%s: does not look like a telemetry record\n", class);
+			exit(EXIT_FAILURE);
+		}
+	} else {
+		class = strdup(TELEMETRY_CLASS_UNKNOWN);
 	}
 
 	severity = strtok(NULL, ".");
@@ -138,7 +153,7 @@ static void deliver_payload(const char *filename)
 		}
 
 		execl("/usr/bin/telem-record-gen", "/usr/bin/telem-record-gen",
-			"--class", TELEMETRY_CLASS,
+			"--class", class,
 			"--severity", severity,
 			"--record-version", version,
 			NULL);
@@ -152,6 +167,7 @@ static void deliver_payload(const char *filename)
 
 		close(fd);
 		free(tmp);
+		free(class);
 
 		//FIXME timeout - don't idle forever here
 		w = waitpid(pid, &wstatus, 0);
