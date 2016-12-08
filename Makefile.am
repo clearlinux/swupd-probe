@@ -14,6 +14,7 @@ swupd_probe_SOURCES = \
 
 EXTRA_DIST = \
 	COPYING \
+	README.md \
 	swupd-probe.md \
 	swupd-probe.path \
 	swupd-probe.service
