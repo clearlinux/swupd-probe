@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([swupd-probe], [1], [dev@lists.clearinux.org])
+AC_INIT([swupd-probe], [2], [dev@lists.clearinux.org])
 AM_INIT_AUTOMAKE([foreign -Wall -W subdir-objects no-dist-gzip dist-xz])
 AM_SILENT_RULES([yes])
 
