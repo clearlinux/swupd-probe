@@ -1,6 +1,6 @@
 [Unit]
 Description=swupd telemetry probe
-ConditionPathExists=!/etc/telemetrics/opt-out
+ConditionPathExists=/etc/telemetrics/opt-in
 
 [Service]
 Type=simple
