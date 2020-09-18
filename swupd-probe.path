@@ -1,8 +1,8 @@
 [Unit]
 Description=swupd telemetry probe
-ConditionPathExists=!/etc/telemetrics/opt-out
-Requires=telemd.socket
-After=telemd.socket
+ConditionPathExists=/etc/telemetrics/opt-in
+Requires=telemprobd.socket
+After=telemprobd.socket
 
 [Path]
 DirectoryNotEmpty=/var/lib/swupd/telemetry
